@@ -1,0 +1,15 @@
+Para correr el proyecto debes tener php 8, node.js y debes tener composer
+
+El proyecto esta echo con Angular y Laravel.
+
+En la ruta  " /inlab " se debe ejecutar
+ * php artisan serve
+
+En la ruta "/inlab/public/inlap-front" se debe ejecutar
+ * ng serve
+
+# Recuerda Instalar las dependencias y tener un servidor como XAMMP
+
+- Dependencias de Laravel: "composer install" en la ruta  "/inlab"
+
+- Dependencias de Angular: npm install en la ruta  "/inlab/public/inlap-front"
