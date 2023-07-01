@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function sign_up(Request $request){
+    public function sign_up(Request $request)
+    {
         try {
             $request->validate([
                 'name' => 'required|string',
@@ -44,7 +45,8 @@ class AuthController extends Controller
         }
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -85,4 +87,13 @@ class AuthController extends Controller
         ], 200);
     }
 
+    public function user(Request $request)
+    {
+
+        return response()->json([
+            "status" => 0,
+            "msg" => "Acerca del perfil del usuario",
+            "data" => $request->user()
+        ]);
+    }
 }
