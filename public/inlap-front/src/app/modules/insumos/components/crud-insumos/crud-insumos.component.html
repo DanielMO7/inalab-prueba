@@ -1,0 +1,97 @@
+<div class="fixed z-10 inset-0 overflow-y-auto">
+  <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="fixed inset-0 transition-opacity">
+      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
+
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+
+    <div
+      class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-[50%]">
+      <div>
+        <div class="text-center mx-4 mb-6">
+          <div class="flex justify-between">
+            <div></div>
+            <div (click)="cerrarCrud()" class="text-red-600 font-bold text-xl cursor-pointer">
+              <i class="fa-regular fa-circle-xmark"></i>
+            </div>
+          </div>
+          <h1 class="text-blue-600 font-bold uppercase text-center">{{ opcionCrud == 1 ? 'Agregar': 'Editar' }} INSUMOS
+          </h1>
+
+          <form class="mx-auto p-2 m-2 w-[100%]" [formGroup]="opcionCrud == 1 ? formCrearInsumo : formEditarInsumo"
+            (ngSubmit)="opcionCrud == 1 ? crearInsumo() : editarInsumo(); submitted = true;">
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mt-2" for="name">Nombre del Insumo:</label>
+              <input formControlName="name" [ngClass]="clasesInputErroneo('name')"
+                class="shadow appearance-none hover:border-blue-600 focus:border-blue-600 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="name" type="text" placeholder="Ingrese el Nombre del Insumo">
+              <div
+                *ngIf="submitted && (validarFormulario().get('name')?.invalid || (validarFormulario().get('name')?.dirty || validarFormulario().get('name')?.touched))">
+                <div class="font-bold text-red-500 text-xs"
+                  *ngIf="validarFormulario().get('name')?.errors?.['required']">El Nombre del Insumo es Requerido.</div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mt-2" for="quantity">Cantidad:</label>
+              <input formControlName="quantity" [ngClass]="clasesInputErroneo('quantity')"
+                class="shadow appearance-none hover:border-blue-600 focus:border-blue-600 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="quantity" type="number" placeholder="Ingrese su Cantidad">
+              <!-- Errores de Validacion del Input Cantidad -->
+              <div
+                *ngIf="submitted && (validarFormulario().get('quantity')?.invalid || (validarFormulario().get('quantity')?.dirty || validarFormulario().get('quantity')?.touched))">
+                <div class="font-bold text-red-500 mx-2 text-xs"
+                  *ngIf="validarFormulario().get('quantity')?.errors?.['required']">La Cantidad es Requerida.</div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="color" class="block text-gray-700 text-sm font-bold mt-2">Color:</label>
+              <div class="flex justify-center p-4">
+                <div class="my-2 flex items-center ">
+                  <input formControlName="color" [ngClass]="clasesInputErroneo('color')"
+                    class=" rounded px-3 py-2 border border-gray-300  focus:border-blue-500" type="color">
+                </div>
+                <div class="my-2 flex items-center ">
+                  <span class="block text-gray-700 text-sm font-bold pl-2 pr-2">Color Seleccionado: </span>
+                  <span class="inline-block w-6 h-6 mr-2"
+                    [style.background]="validarFormulario().get('color')?.value"></span>
+                  <span>{{ validarFormulario().get('color')?.value }}</span>
+                </div>
+              </div>
+              <div
+                *ngIf="submitted && (validarFormulario().get('color')?.invalid || (validarFormulario().get('color')?.dirty || validarFormulario().get('color')?.touched))">
+                <div class="font-bold text-red-500 mx-2 text-xs"
+                  *ngIf="validarFormulario().get('color')?.errors?.['required']">El Color es Requerido.</div>
+              </div>
+
+            </div>
+
+            <div class="flex items-center justify-center aling-center w-full">
+              <button *ngIf="!loading" type="submit"
+                class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold font-semibold rounded-lg shadow-md focus:shadow-outline">
+                {{ opcionCrud == 1 ? 'Crear' : 'Editar' }} Insumo
+              </button>
+              <div *ngIf="loading" class="flex">
+                <button type="button"
+                  class="inline-flex justify-center items-center px-4 py-2 font-semibold leading-6 shadow-md focus:shadow-outline rounded-md text-white bg-blue-500 hover:bg-blue-700 transition ease-in-out duration-150 cursor-not-allowed font-bold">
+                  <div class="flex font-bold">
+                    <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                      </path>
+                    </svg>
+                    Cargando...
+                  </div>
+                </button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

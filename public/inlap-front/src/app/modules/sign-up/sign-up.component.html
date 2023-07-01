@@ -1,0 +1,89 @@
+<div class="min-h-[85vh]">
+  <div class="flex justify-center aling-center items-center">
+    <div class="w-[30rem] shadow-lg m-4 p-4 border border-gray-300 rounded-md">
+      <form class="mx-auto" [formGroup]="formularioRegistro" (ngSubmit)="registrarUsuario(); submitted = true;">
+        <div class="text-center font-bold text-blue-600 text-xl uppercase mb-2">
+          Ingresar
+        </div>
+        <!-- Nombre -->
+        <div class="mb-4">
+          <label class="block ml-1 text-gray-700 font-semibold mt-2" for="name">
+            Nombre:
+          </label>
+          <input formControlName="name"
+            class="shadow appearance-none hover:border-blue-600 focus:border-blue-600 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="text" name="name" placeholder="Tu Nombre." [ngClass]="clasesInputErroneo('name')" />
+          <div
+            *ngIf="submitted && formularioRegistro.get('name')?.invalid || (formularioRegistro.get('name')?.dirty || formularioRegistro.get('name')?.touched)">
+            <div class="font-bold text-red-500 text-xs" *ngIf="formularioRegistro.get('name')?.errors?.['required']">
+              El
+              nombre es requerido.</div>
+            <div class="font-bold text-red-500 text-xs" *ngIf="formularioRegistro.get('name')?.errors?.['pattern']">
+              El
+              nombre no admite números.</div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mt-2" for="email">Correo electrónico:</label>
+          <input formControlName="email" [ngClass]="clasesInputErroneo('email')"
+            class="shadow appearance-none hover:border-blue-600 focus:border-blue-600 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="email" type="email" placeholder="Ingrese su correo electrónico">
+          <div
+            *ngIf="submitted && formularioRegistro.get('email')?.invalid || (formularioRegistro.get('email')?.dirty || formularioRegistro.get('email')?.touched)">
+            <div class="font-bold text-red-500 text-xs" *ngIf="formularioRegistro.get('email')?.errors?.['required']">El
+              Correo Electrónico es Requerido.</div>
+            <div class="font-bold text-red-500 text-xs" *ngIf="formularioRegistro.get('email')?.errors?.['pattern']">
+              Correo Electrónico Invalido.</div>
+          </div>
+        </div>
+
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mt-2" for="email">Contraseña:</label>
+          <input formControlName="password" [ngClass]="clasesInputErroneo('password')"
+            class="shadow appearance-none hover:border-blue-600 focus:border-blue-600 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="password" type="password" placeholder="Ingrese su Contraseña">
+          <!-- Errores de Validacion del Input Contraseña -->
+          <div
+            *ngIf="submitted && formularioRegistro.get('password')?.invalid || (formularioRegistro.get('password')?.dirty || formularioRegistro.get('password')?.touched)">
+            <div class="font-bold text-red-500 mx-2 text-xs"
+              *ngIf="formularioRegistro.get('password')?.errors?.['required']">La
+              Contraseña es Requerida.</div>
+          </div>
+        </div>
+
+        <!-- Errores Generales Por Informacion de Autenticacion Erronea -->
+        <div *ngIf="submitted" class="grid grid-cols-1 gap-2">
+          <div class="font-bold text-red-500 mx-2 text-sm p-1 m-1 mb-4 text-center" *ngIf="correoInvalido">
+            Correo Electrónico Incorrecto.</div>
+          <div class="font-bold text-red-500 mx-2 text-sm p-1 m-1 mb-4 text-center" *ngIf="contrasenaInvalida">
+            Contraseña Incorrecta.</div>
+        </div>
+
+
+        <div class="flex items-center justify-center aling-center w-full">
+          <button *ngIf="!loadingRegister" type="submit"
+            class=" px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold font-semibold rounded-lg shadow-md focus:shadow-outline">
+            Iniciar Sesión
+          </button>
+          <!-- Boton de Carga de Formulario | Loading Login -->
+          <div *ngIf="loadingRegister" class="flex">
+            <button type="button"
+              class=" inline-flex justify-center items-center px-4 py-2 font-semibold leading-6 shadow-md focus:shadow-outline rounded-md text-white bg-blue-500 hover:bg-blue-700 transition ease-in-out duration-150 cursor-not-allowed font-bold">
+              <div class="flex font-bold">
+                <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                  </path>
+                </svg>
+                Cargando...
+              </div>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

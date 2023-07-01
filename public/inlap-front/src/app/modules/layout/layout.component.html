@@ -1,0 +1,18 @@
+<div class="flex flex-col min-h-screen">
+  <app-header></app-header>
+
+  <div class="flex-grow">
+    <!-- <router-outlet></router-outlet> -->
+    <router-outlet *ngIf="Loading; else elseLoading" (Loading)="activarLoading()"></router-outlet>
+        <ng-template #elseLoading>
+          <div>
+            <router-outlet></router-outlet>
+            <div class="fixed inset-0 z-50 flex items-center overflow-hidden justify-center bg-gray-900 bg-opacity-50">
+              <div class="loader"></div>
+            </div>
+          </div>
+        </ng-template>
+  </div>
+
+  <app-footer></app-footer>
+</div>

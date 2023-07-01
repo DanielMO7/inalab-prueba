@@ -1,0 +1,32 @@
+<header class="bg-gray-800 text-white h-14">
+  <div class="container mx-auto flex justify-between items-center h-full">
+    <div class="grid grid-cols-3 gap-2 w-full h-full ">
+      <div class="col-span-1 ">
+        <div  class="text-center font-bold h-full w-full flex items-center ">
+          <a class="text-xl font-bold" href="/"><i class=" fa-solid fa-code"></i> Ilana Prueba</a>
+        </div>
+      </div>
+      <div class="col-span-1"></div>
+      <div class="col-span-1 flex justify-center align-center items-center justify-between cursor-pointer" >
+        <div class="hover:bg-gray-600 text-center font-bold h-full w-full flex items-center justify-center" [routerLink]="'/'" *ngIf="validarToken()">
+          Inicio
+        </div>
+        <div class="hover:bg-gray-600 text-center font-bold h-full w-full flex items-center justify-center" [routerLink]="'/perfi'" *ngIf="validarToken()">
+          Perfil
+        </div>
+        <div class="hover:bg-gray-600 text-center font-bold h-full w-full flex items-center justify-center" [routerLink]="'/insumos'" *ngIf="validarToken()">
+          Insumos
+        </div>
+        <div class="hover:bg-gray-600 text-center font-bold h-full w-full flex items-center justify-center" [routerLink]="'/login'" *ngIf="!validarToken()" >
+          Login
+        </div>
+        <div class="hover:bg-gray-600 text-center font-bold h-full w-full flex items-center justify-center" [routerLink]="'/sign-up'" *ngIf="!validarToken()">
+          Registro
+        </div>
+        <div title="Cerrar Sesión" class="hover:bg-gray-600 text-center font-bold h-full w-full flex items-center justify-center" *ngIf="validarToken()" (click)="cerrarSesion()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,67 @@
+<div class="min-h-[85vh]">
+  <div class="flex justify-center aling-center items-center ">
+    <div class="grid grid-cols-2 gap-2 w-full">
+      <div class="col-span-1 flex justify-center aling-center items-center  h-36">
+        <div class="text-blue-600 font-bold text-center text-xl uppercase">Insumos Registrados:</div>
+      </div>
+      <div class="col-span-1  flex justify-center aling-center items-center  h-36">
+        <button (click)="abrirCrearInsumo()"
+          class="m-2 p-2 w-36 bg-green-600 hover:bg-green-400 text-white font-bold rounded-md ">Agregar Insumo</button>
+      </div>
+      -
+      <div class="col-span-2 flex justify-center aling-center items-center ">
+        <table class="min-w-[75%] bg-white border border-gray-200 m-2 p-4 border shadow-lg border-black ">
+          <thead class="border-gray-200 ">
+            <tr class="bg-blue-600 rounded-lg">
+              <th class="py-3 px-6 text-white uppercase tracking-wider">
+                ID
+              </th>
+              <th class="py-3 px-6 text-white uppercase tracking-wider">
+                Insumo
+              </th>
+              <th class="py-3 px-6 text-white uppercase tracking-wider">
+                Cantidad
+              </th>
+              <th class="py-3 px-6 text-white uppercase tracking-wider">
+                Color
+              </th>
+              <th class="py-3 px-6 text-white uppercase tracking-wider">
+                Acciones
+              </th>
+            </tr>
+          </thead>
+          <tbody class="shadow-lg border-gray-200 ">
+            <tr *ngFor="let insumo of insumo_user" class="hover:bg-gray-300 rounded-lg text-center">
+              <td class="py-4 px-6 border-b border-gray-200">{{ insumo.id }}</td>
+              <td class="py-4 px-6 border-b border-gray-200">{{ insumo.name }}</td>
+              <td class="py-4 px-6 border-b border-gray-200">{{ insumo.quantity }}</td>
+              <td class="py-4 px-6 border-b border-gray-200 flex justify-center aling-center items-center">
+                <div class="rounded-full h-10 w-10" [style.background]="insumo.color"></div>
+              </td>
+              <td class="py-4 px-6 border-b border-gray-200">
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="col-span-1 flex justify-center aling-center items-center">
+                    <button (click)="abrirEditarInsumo(insumo)" title="Editar Insumo"
+                      class="text-indigo-600 hover:text-indigo-900">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                  </div>
+                  <div class="col-span-1 flex justify-center aling-center items-center">
+                    <button (click)="eliminarInsumo(insumo.id)"  title="Eliminar Insumo" class="text-red-600 hover:text-red-900">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="openCrudInsumo">
+  <app-crud-insumos [opcionCrud]="opcionCrud" [insumoAccion]="insumoAccion" (cerrarCrudPadre)="cerrarCrud()"
+    (actualizarArraydPadre)="actualizarArrayInsumos($event)"></app-crud-insumos>
+</div>
